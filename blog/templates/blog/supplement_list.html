@@ -1,0 +1,155 @@
+{% extends 'blog/base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<style>
+    .container-full {
+        width: 100%;
+        padding: 0 10px;
+        margin: 0;
+    }
+
+    .responsive-table {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed; /* 칼럼 너비 고정 */
+        min-width: 700px;
+    }
+
+    th {
+        padding: 16px;
+        border: 1px solid #ddd;
+        vertical-align: middle;
+        text-align: center;  /* 헤더는 가운데 정렬 */
+        font-weight: bold;
+        min-width: 120px;
+        background-color: #f4f4f4;
+    }
+
+    th:first-child {
+        min-width: 160px;
+    }
+
+    /* 첫 번째 컬럼 (성분명) td만 가운데 정렬 */
+    td:first-child {
+        text-align: center;
+        min-width: 160px;
+        vertical-align: middle;
+    }
+
+    /* 나머지 td는 왼쪽 정렬 및 위쪽 정렬 */
+    td:not(:first-child) {
+        text-align: left;
+        vertical-align: top;
+        min-width: 120px;
+        word-break: normal;
+        white-space: normal;
+        padding: 16px;
+        border: 1px solid #ddd;
+    }
+
+    .supplement-list {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 6px;
+    }
+
+    .supplement-list li {
+        background-color: #f0f8ff;
+        border-left: 5px solid #4da6ff;
+        border-radius: 4px;
+        padding: 8px 12px 8px 36px;
+        margin-bottom: 8px;
+        position: relative;
+        font-size: 16px;
+        word-break: keep-all;
+    }
+
+    .supplement-list li::before {
+        content: "✔";
+        color: #4da6ff;
+        position: absolute;
+        left: 12px;
+        top: 9px;
+        font-size: 14px;
+    }
+
+    /* 검색폼 스타일 */
+    .search-form {
+        margin-bottom: 20px;
+    }
+
+    .search-form input[type="text"] {
+        padding: 8px;
+        width: 200px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .search-form button {
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 768px) {
+        th, td:not(:first-child) {
+            font-size: 14px;
+            padding: 12px;
+        }
+
+        td:first-child {
+            font-size: 14px;
+            padding: 12px;
+        }
+
+        .supplement-list li {
+            font-size: 14px;
+            padding: 8px 10px 8px 30px;
+        }
+
+        .supplement-list li::before {
+            font-size: 12px;
+            top: 8px;
+        }
+    }
+</style>
+
+
+<div class="container-full">
+    <h1>💊 영양제 정보</h1>
+
+    <form method="GET" class="search-form" style="margin-bottom: 20px;">
+        <input type="text" name="q" placeholder="성분 검색..." value="{{ query|default_if_none:'' }}" style="padding: 8px; width: 200px;">
+        <button type="submit" style="padding: 8px 12px;">검색</button>
+    </form>
+
+    <div class="responsive-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>성분명</th>
+                    <th>효능</th>
+                    <th>부작용</th>
+                    <th>특이사항</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in supplements %}
+                <tr>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.effect|to_list }}</td>
+                    <td>{{ s.side_effect|to_list }}</td>
+                    <td>{{ s.note|to_list }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4">검색 결과가 없습니다.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

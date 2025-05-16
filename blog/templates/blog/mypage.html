@@ -1,0 +1,70 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<style>
+    .mypage-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 40px;
+        background-color: #f9fbff;
+        border-radius: 10px;
+    }
+
+    .mypage-title {
+        font-size: 32px;
+        font-weight: bold;
+        color: #2d3436;
+        margin-bottom: 30px;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 15px;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #555;
+    }
+
+    .info-value {
+        color: #333;
+    }
+
+    .btn-edit {
+        display: inline-block;
+        background-color: #2980b9;
+        color: white;
+        padding: 12px 20px;
+        text-decoration: none;
+        border-radius: 6px;
+        margin-top: 20px;
+    }
+
+    .btn-edit:hover {
+        background-color: #1c5984;
+    }
+</style>
+
+<div class="mypage-container">
+    <div class="mypage-title">👤 마이페이지</div>
+    
+    <div class="info-grid">
+        <div class="info-label">사용자명:</div>
+        <div class="info-value">{{ user.username }}</div>
+    </div>
+    
+    <div class="info-grid">
+        <div class="info-label">이메일:</div>
+        <div class="info-value">{{ user.email }}</div>
+    </div>
+    
+    <div class="info-grid">
+        <div class="info-label">가입일:</div>
+        <div class="info-value">{{ user.date_joined|date:"Y년 m월 d일" }}</div>
+    </div>
+</div>
+{% endblock %}

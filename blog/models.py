@@ -32,3 +32,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+class Supplement(models.Model):
+    name = models.CharField(max_length=100, verbose_name="성분명")
+    effect = models.TextField(verbose_name="효능")
+    side_effect = models.TextField(verbose_name="부작용", blank=True)
+    note = models.TextField(verbose_name="특이사항", blank=True)
+
+    def __str__(self):
+        return self.name
