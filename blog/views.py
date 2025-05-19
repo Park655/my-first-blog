@@ -7,6 +7,9 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm
+from django.contrib.auth import login
 
 # Create your views here.
 
@@ -25,46 +28,7 @@ def post_detail(request, pk):
         return HttpResponseRedirect(reverse('supplement_list'))
     else:
         return render(request, 'blog/post_detail.html', {'post': post})
-@login_required
-def post_new(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
-@login_required
-def post_edit(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
-@login_required
-def post_draft_list(request):
-    posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
-    return render(request, 'Blog/post_draft_list.html', {'posts': posts})
-@login_required
-def post_publish(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method=='POST':
-        post.publish()
-    return redirect('post_detail', pk=pk)
-@login_required
-def post_remove(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    post.delete()
-    return redirect('post_list')
+
 def supplement_list(request):
     query = request.GET.get('q')  # <- 기본값 생략
     if query:
@@ -75,3 +39,13 @@ def supplement_list(request):
         'supplements': supplements,
         'query': query,
     })
+def signup(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # 회원가입 후 자동 로그인
+            return redirect('post_list')  # 원하는 페이지로 이동
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})

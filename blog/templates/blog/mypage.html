@@ -54,17 +54,28 @@
     
     <div class="info-grid">
         <div class="info-label">사용자명:</div>
-        <div class="info-value">{{ user.username }}</div>
-    </div>
-    
-    <div class="info-grid">
-        <div class="info-label">이메일:</div>
-        <div class="info-value">{{ user.email }}</div>
+        <div class="info-value">{{ user.first_name }}</div>
     </div>
     
     <div class="info-grid">
         <div class="info-label">가입일:</div>
         <div class="info-value">{{ user.date_joined|date:"Y년 m월 d일" }}</div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-label">나이:</div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-label">추천받은 영양제 종류:</div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-label">쿠폰:</div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-label">도전 과제:</div>
     </div>
 </div>
 {% endblock %}
