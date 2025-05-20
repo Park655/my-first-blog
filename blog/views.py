@@ -10,6 +10,11 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
 from django.contrib.auth import login
+from datetime import date
+from .models import UserProfile
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
+from django.db import IntegrityError
 
 # Create your views here.
 
@@ -19,7 +24,7 @@ def post_list(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if post.title == '마이페이지':
-        return render(request, 'blog/mypage.html', {'post': post})
+        return HttpResponseRedirect(reverse('mypage'))
     elif post.title == '설문조사':
         return render(request, 'blog/survey.html', {'post': post})
     elif post.title == '캘린더':
@@ -30,11 +35,11 @@ def post_detail(request, pk):
         return render(request, 'blog/post_detail.html', {'post': post})
 
 def supplement_list(request):
-    query = request.GET.get('q')  # <- 기본값 생략
+    query = request.GET.get('q')
     if query:
         supplements = Supplement.objects.filter(name__icontains=query)
     else:
-        supplements = Supplement.objects.all()  # 전체 출력
+        supplements = Supplement.objects.all()
     return render(request, 'blog/supplement_list.html', {
         'supplements': supplements,
         'query': query,
@@ -43,9 +48,34 @@ def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)  # 회원가입 후 자동 로그인
-            return redirect('post_list')  # 원하는 페이지로 이동
+            try:
+                user = form.save()
+                login(request, user)
+                return redirect('post_list')
+            except IntegrityError:
+                form.add_error('username', '이미 사용 중인 아이디입니다.')
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
+def calculate_age(birthdate):
+    today = date.today()
+    age = today.year - birthdate.year
+    if (today.month, today.day) < (birthdate.month, birthdate.day):
+        age -= 1
+    return age
+
+def mypage_view(request):
+    try:
+        profile = UserProfile.objects.get(user=request.user)
+        birthdate = profile.birthdate
+        age = calculate_age(birthdate) if birthdate else None
+
+    except ObjectDoesNotExist:
+        profile = None
+        birthdate = None
+        age = None
+
+    return render(request, 'blog/mypage.html', {
+        'profile': profile,
+        'age': age,
+    })

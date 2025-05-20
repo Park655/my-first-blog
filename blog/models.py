@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 
 
@@ -40,3 +41,15 @@ class Supplement(models.Model):
 
     def __str__(self):
         return self.name
+class UserProfile(models.Model):
+    GENDER_CHOICES = (
+        ('M', '남자'),
+        ('F', '여자'),
+    )
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    birthdate = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username}의 프로필"
