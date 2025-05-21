@@ -1,5 +1,4 @@
 {% extends 'blog/base.html' %}
-{% load custom_filters %}
 {% block content %}
 <!-- 마이페이지 섹션 -->
 <section id="mypage" class="bg-light py-5">
@@ -65,56 +64,9 @@
 <section id="supplement" class="py-5">
     <div class="container">
         <h2 class="text-center mb-4">💊 영양제 정보</h2>
-
-        <style>
-            .responsive-table {
-                overflow-x: auto;
-            }
-
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                table-layout: fixed;
-                min-width: 700px;
-            }
-
-            th {
-                padding: 16px;
-                border: 1px solid #ddd;
-                vertical-align: middle;
-                text-align: center;
-                font-weight: bold;
-                background-color: #f4f4f4;
-            }
-
-            td:first-child {
-                text-align: center;
-                vertical-align: middle;
-            }
-
-            td:not(:first-child) {
-                text-align: left;
-                vertical-align: top;
-                padding: 16px;
-                border: 1px solid #ddd;
-                word-break: break-word;
-            }
-
-            .search-form {
-                margin-bottom: 20px;
-            }
-
-            .search-form input[type="text"] {
-                padding: 8px;
-                width: 200px;
-            }
-
-            .search-form button {
-                padding: 8px 12px;
-            }
-        </style>
-
-        {% include "blog/_supplement_content.html" %}
+        <p class="text-center">
+            <a href="{% url 'supplement_list' %}" class="btn btn-primary">영양제 정보 보러가기</a>
+        </p>
     </div>
 </section>
 

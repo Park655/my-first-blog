@@ -21,9 +21,10 @@ from django.db import IntegrityError
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
 
-    # 마이페이지용 profile, age
+    # 기본적으로 profile과 age를 None으로 초기화
     profile = None
     age = None
+
     if request.user.is_authenticated:
         try:
             profile = UserProfile.objects.get(user=request.user)
@@ -32,27 +33,12 @@ def post_list(request):
         except ObjectDoesNotExist:
             pass
 
-    # 영양제 정보용
-    query = request.GET.get('q')
-    category_ids = request.GET.getlist('categories')
-
-    supplements = Supplement.objects.all()
-    if query:
-        supplements = supplements.filter(name__icontains=query)
-    if category_ids:
-        for cid in category_ids:
-            supplements = supplements.filter(categories__id=cid)
-    categories = EffectCategory.objects.all()
-
     return render(request, 'blog/post_list.html', {
         'posts': posts,
         'profile': profile,
         'age': age,
-        'supplements': supplements,
-        'query': query,
-        'categories': categories,
-        'selected_categories': list(map(int, category_ids)),
     })
+
 
 
 def post_detail(request, pk):

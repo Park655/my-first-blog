@@ -16,7 +16,7 @@
     table {
         width: 100%;
         border-collapse: collapse;
-        table-layout: fixed;
+        table-layout: fixed; /* 칼럼 너비 고정 */
         min-width: 700px;
     }
 
@@ -24,7 +24,7 @@
         padding: 16px;
         border: 1px solid #ddd;
         vertical-align: middle;
-        text-align: center;
+        text-align: center;  /* 헤더는 가운데 정렬 */
         font-weight: bold;
         min-width: 120px;
         background-color: #f4f4f4;
@@ -34,14 +34,14 @@
         min-width: 160px;
     }
 
-    
+    /* 첫 번째 컬럼 (성분명) td만 가운데 정렬 */
     td:first-child {
         text-align: center;
         min-width: 160px;
         vertical-align: middle;
     }
 
-    
+    /* 나머지 td는 왼쪽 정렬 및 위쪽 정렬 */
     td:not(:first-child) {
         text-align: left;
         vertical-align: top;
@@ -78,7 +78,7 @@
         font-size: 14px;
     }
 
-    
+    /* 검색폼 스타일 */
     .search-form {
         margin-bottom: 20px;
     }

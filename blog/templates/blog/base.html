@@ -32,7 +32,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="/">Vitabloom</a>
+            <a class="navbar-brand" href="/">VITABLOOM</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu <i class="fas fa-bars"></i>
             </button>
@@ -50,7 +50,7 @@
                         <li class="nav-item"><a class="nav-link" href="/">영양제 정보</a></li>
                     {% endif %}
                     {% if user.is_authenticated %}
-                        <li class="nav-item text-white d-flex align-items-center">👋 {{ user.first_name }} 님 반갑습니다!</li>
+                        <li class="nav-item text-black d-flex align-items-center">👋 {{ user.first_name }} 님 반갑습니다!</li>
                         <li class="nav-item">
                             <form method="post" action="{% url 'logout' %}" style="margin: 0;">
                                 {% csrf_token %}
@@ -72,7 +72,7 @@
             <div class="d-flex justify-content-center">
                 <div class="text-center">
                     <h1 class="mx-auto my-0 text-uppercase">Vitabloom</h1>
-                    <h2 class="text-white-50 mx-auto mt-2 mb-5">건강을 위한 스마트한 영양제 관리</h2>
+                    <h2 class="text-black-50 mx-auto mt-2 mb-5">당신의 건강을 위한 맞춤 영양제 솔루션</h2>
                 </div>
             </div>
         </div>
