@@ -6,4 +6,6 @@ urlpatterns = [
     path('post/<int:pk>/', views.post_detail, name='post_detail'),
     path('supplements_list/', views.supplement_list, name='supplement_list'),
     path('mypage/', views.mypage_view, name='mypage'),
+    path('survey/', views.survey_view, name='survey'),
+    path('calendar/', views.calendar_view, name='calendar'),
 ]

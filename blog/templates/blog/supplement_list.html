@@ -16,7 +16,7 @@
     table {
         width: 100%;
         border-collapse: collapse;
-        table-layout: fixed; /* 칼럼 너비 고정 */
+        table-layout: fixed;
         min-width: 700px;
     }
 
@@ -24,7 +24,7 @@
         padding: 16px;
         border: 1px solid #ddd;
         vertical-align: middle;
-        text-align: center;  /* 헤더는 가운데 정렬 */
+        text-align: center;
         font-weight: bold;
         min-width: 120px;
         background-color: #f4f4f4;
@@ -34,14 +34,14 @@
         min-width: 160px;
     }
 
-    /* 첫 번째 컬럼 (성분명) td만 가운데 정렬 */
+    
     td:first-child {
         text-align: center;
         min-width: 160px;
         vertical-align: middle;
     }
 
-    /* 나머지 td는 왼쪽 정렬 및 위쪽 정렬 */
+    
     td:not(:first-child) {
         text-align: left;
         vertical-align: top;
@@ -78,7 +78,7 @@
         font-size: 14px;
     }
 
-    /* 검색폼 스타일 */
+    
     .search-form {
         margin-bottom: 20px;
     }
@@ -124,6 +124,16 @@
 
     <form method="GET" class="search-form" style="margin-bottom: 20px;">
         <input type="text" name="q" placeholder="성분 검색..." value="{{ query|default_if_none:'' }}" style="padding: 8px; width: 200px;">
+        <div style="margin-top: 10px; margin-bottom: 10px;">
+            <strong>효능 필터:</strong><br>
+            {% for cat in categories %}
+                <label style="margin-right: 12px;">
+                    <input type="checkbox" name="categories" value="{{ cat.id }}"
+                        {% if cat.id in selected_categories %}checked{% endif %}>
+                    {{ cat.name }}
+                </label>
+            {% endfor %}
+        </div>
         <button type="submit" style="padding: 8px 12px;">검색</button>
     </form>
 

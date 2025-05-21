@@ -20,24 +20,41 @@ C:.
 ¦¢  ¦¢  ¦¢  0001_initial.py
 ¦¢  ¦¢  ¦¢  0002_comment.py
 ¦¢  ¦¢  ¦¢  0003_supplement.py
+¦¢  ¦¢  ¦¢  0004_userprofile.py
+¦¢  ¦¢  ¦¢  0005_effectcategory_alter_supplement_effect_and_more.py
 ¦¢  ¦¢  ¦¢  __init__.py
 ¦¢  ¦¢  ¦¢  
 ¦¢  ¦¢  ¦¦¦¡__pycache__
 ¦¢  ¦¢          0001_initial.cpython-313.pyc
 ¦¢  ¦¢          0002_comment.cpython-313.pyc
 ¦¢  ¦¢          0003_supplement.cpython-313.pyc
+¦¢  ¦¢          0004_userprofile.cpython-313.pyc
+¦¢  ¦¢          0005_effectcategory_alter_supplement_effect_and_more.cpython-313.pyc
 ¦¢  ¦¢          __init__.cpython-313.pyc
 ¦¢  ¦¢          
 ¦¢  ¦§¦¡static
-¦¢  ¦¢  ¦¦¦¡css
-¦¢  ¦¢          blog.css
-¦¢  ¦¢          bootstrap.min.css
+¦¢  ¦¢  ¦§¦¡assets
+¦¢  ¦¢  ¦¢  ¦¢  favicon.ico
+¦¢  ¦¢  ¦¢  ¦¢  
+¦¢  ¦¢  ¦¢  ¦¦¦¡img
+¦¢  ¦¢  ¦¢          bg-masthead.jpg
+¦¢  ¦¢  ¦¢          bg-signup.jpg
+¦¢  ¦¢  ¦¢          demo-image-01.jpg
+¦¢  ¦¢  ¦¢          demo-image-02.jpg
+¦¢  ¦¢  ¦¢          ipad.png
+¦¢  ¦¢  ¦¢          
+¦¢  ¦¢  ¦§¦¡css
+¦¢  ¦¢  ¦¢      blog.css
+¦¢  ¦¢  ¦¢      bootstrap.min.css
+¦¢  ¦¢  ¦¢      styles.css
+¦¢  ¦¢  ¦¢      
+¦¢  ¦¢  ¦¦¦¡js
+¦¢  ¦¢          scripts.js
 ¦¢  ¦¢          
 ¦¢  ¦§¦¡templates
 ¦¢  ¦¢  ¦§¦¡blog
 ¦¢  ¦¢  ¦¢      base.html
 ¦¢  ¦¢  ¦¢      calendar.html
-¦¢  ¦¢  ¦¢      information.html
 ¦¢  ¦¢  ¦¢      mypage.html
 ¦¢  ¦¢  ¦¢      post_detail.html
 ¦¢  ¦¢  ¦¢      post_draft_list.html
@@ -48,6 +65,7 @@ C:.
 ¦¢  ¦¢  ¦¢      
 ¦¢  ¦¢  ¦¦¦¡registration
 ¦¢  ¦¢          login.html
+¦¢  ¦¢          signup.html
 ¦¢  ¦¢          
 ¦¢  ¦§¦¡templatetags
 ¦¢  ¦¢  ¦¢  custom_filters.py

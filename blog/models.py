@@ -19,25 +19,18 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-
-class Comment(models.Model):
-    post = models.ForeignKey('blog.Post', related_name='comments', on_delete=models.CASCADE)
-    author = models.CharField(max_length=200)
-    text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
-    approved_comment = models.BooleanField(default=False)
-
-    def approve(self):
-        self.approved_comment = True
-        self.save()
+class EffectCategory(models.Model):
+    name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
-        return self.text
+        return self.name
 class Supplement(models.Model):
-    name = models.CharField(max_length=100, verbose_name="성분명")
-    effect = models.TextField(verbose_name="효능")
-    side_effect = models.TextField(verbose_name="부작용", blank=True)
-    note = models.TextField(verbose_name="특이사항", blank=True)
+    name = models.CharField(max_length=100)
+    effect = models.TextField()
+    side_effect = models.TextField(blank=True)
+    note = models.TextField(blank=True)
+
+    categories = models.ManyToManyField(EffectCategory, blank=True, related_name='supplements')
 
     def __str__(self):
         return self.name

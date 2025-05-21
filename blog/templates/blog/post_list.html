@@ -1,9 +1,132 @@
 {% extends 'blog/base.html' %}
-
+{% load custom_filters %}
 {% block content %}
-    {% for post in posts %}
-        <div class="post">
-            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-        </div>
-    {% endfor %}
-{% endblock content %}
+<!-- 마이페이지 섹션 -->
+<section id="mypage" class="bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">👤 마이페이지</h2>
+
+        <style>
+            .mypage-container {
+                width: 100%;
+                max-width: 100%;
+                padding: 40px;
+                background-color: #f9fbff;
+                border-radius: 10px;
+            }
+
+            .mypage-title {
+                font-size: 32px;
+                font-weight: bold;
+                color: #2d3436;
+                margin-bottom: 30px;
+            }
+
+            .info-grid {
+                display: grid;
+                grid-template-columns: 200px 1fr;
+                gap: 15px;
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .info-label {
+                font-weight: 600;
+                color: #555;
+            }
+
+            .info-value {
+                color: #333;
+            }
+        </style>
+
+        {% include "blog/_mypage_content.html" %}
+    </div>
+</section>
+
+
+<!-- 설문조사 섹션 -->
+<section id="survey" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">📝 설문조사</h2>
+        <p class="text-center">설문조사 기능에 대한 설명을 여기에 작성하세요.</p>
+    </div>
+</section>
+
+<!-- 캘린더 섹션 -->
+<section id="calendar" class="bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">📅 캘린더</h2>
+        <p class="text-center">캘린더 관련 기능 설명을 여기에 작성하세요.</p>
+    </div>
+</section>
+
+<!-- 영양제 정보 섹션 -->
+<section id="supplement" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">💊 영양제 정보</h2>
+
+        <style>
+            .responsive-table {
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                min-width: 700px;
+            }
+
+            th {
+                padding: 16px;
+                border: 1px solid #ddd;
+                vertical-align: middle;
+                text-align: center;
+                font-weight: bold;
+                background-color: #f4f4f4;
+            }
+
+            td:first-child {
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            td:not(:first-child) {
+                text-align: left;
+                vertical-align: top;
+                padding: 16px;
+                border: 1px solid #ddd;
+                word-break: break-word;
+            }
+
+            .search-form {
+                margin-bottom: 20px;
+            }
+
+            .search-form input[type="text"] {
+                padding: 8px;
+                width: 200px;
+            }
+
+            .search-form button {
+                padding: 8px 12px;
+            }
+        </style>
+
+        {% include "blog/_supplement_content.html" %}
+    </div>
+</section>
+
+
+<!-- 마무리 메시지 -->
+<section class="py-5 text-center" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h4 class="mb-3">이용해주셔서 감사합니다.</h4>
+        <p class="lead">
+            늘 신뢰도 높은 자료들을 바탕으로<br>
+            <strong>개인 맞춤형 영양제</strong>를 추천해드리겠습니다.
+        </p>
+    </div>
+</section>
+{% endblock %}

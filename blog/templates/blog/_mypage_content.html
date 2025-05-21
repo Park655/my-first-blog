@@ -1,0 +1,61 @@
+<div class="mypage-container">
+    <div class="mypage-title">👤 마이페이지</div>
+
+    <div class="info-grid">
+        <div class="info-label">이름:</div>
+        <div class="info-value">{{ user.first_name }}</div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-label">성별:</div>
+        <div class="info-value">
+            {% if profile.gender %}
+                {{ profile.get_gender_display }}
+            {% else %}
+                성별 정보 없음
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-label">가입일:</div>
+        <div class="info-value">{{ user.date_joined|date:"Y년 m월 d일" }}</div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-label">생년월일:</div>
+        <div class="info-value">
+            {% if profile and profile.birthdate %}
+                {{ profile.birthdate|date:"Y년 m월 d일" }}
+            {% else %}
+                생년월일 정보 없음
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-label">만 나이:</div>
+        <div class="info-value">
+            {% if age %}
+                {{ age }}세
+            {% else %}
+                계산할 생년월일 없음
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-label">추천받은 영양제 종류:</div>
+        <div class="info-value">-</div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-label">쿠폰:</div>
+        <div class="info-value">-</div>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-label">도전 과제:</div>
+        <div class="info-value">-</div>
+    </div>
+</div>
