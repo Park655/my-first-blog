@@ -3,6 +3,8 @@ from .models import Post
 from .models import UserProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.forms.widgets import SelectDateWidget
+import datetime
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -13,7 +15,12 @@ class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(label='아이디', max_length=150)
     first_name = forms.CharField(label='이름', max_length=30)
     gender = forms.ChoiceField(label='성별', choices=UserProfile.GENDER_CHOICES)
-    birthdate = forms.DateField(label='생년월일', widget=forms.DateInput(attrs={'type': 'date'}))
+    birthdate = forms.DateField(
+        label='생년월일',
+        widget=SelectDateWidget(
+            years=range(datetime.date.today().year, 1900, -1)
+        )
+    )
 
     class Meta:
         model = User
